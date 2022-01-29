@@ -1,0 +1,39 @@
+version: '3.2'
+services:
+  postgres-login:
+    image: postgres:12.8
+    container_name: postgres-login
+    restart: always
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - login-network
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+  login-service:
+    container_name: login-service
+    image: login-service:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    volumes:
+      - /data/login-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-login:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - postgres-login
+    networks:
+      - login-network
+
+networks:
+  login-network:
+    driver: bridge
