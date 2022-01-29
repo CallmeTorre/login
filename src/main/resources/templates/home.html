@@ -5,11 +5,27 @@
   xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 >
   <head>
-    <title>Spring Security Example</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+
+    <!-- CSS -->
+    <link href="/static/favicons/favicon.ico" rel="shortcut icon">
+    <link href="https://framework-gb.cdn.gob.mx/qa/assets/styles/main.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Welcome!</h1>
 
-    <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+  <!-- Contenido -->
+  <main class="page">
+      <div class="container">
+        <h1>Bienvenido</h1>
+        <hr class="red">
+        <p>Haz click <a th:href="@{/hello}">aqui</a> para ser saludado.</p>
+      </div>
+    </main>
+
+    <!-- JS -->
+    <script src="https://framework-gb.cdn.gob.mx/qa/gobmx.js"></script>
   </body>
 </html>

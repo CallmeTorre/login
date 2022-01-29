@@ -1,28 +1,65 @@
 <!DOCTYPE html>
 <html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="https://www.thymeleaf.org"
-  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 >
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Formulario de Login</title>
+
+    <!-- CSS -->
+    <link href="/static/favicons/favicon.ico" rel="shortcut icon">
+    <link href="https://framework-gb.cdn.gob.mx/qa/assets/styles/main.css" rel="stylesheet">
   </head>
   <body>
-    <div th:if="${param.error}">Invalid username and password.</div>
-    <div th:if="${param.logout}">You have been logged out.</div>
-    <form th:action="@{/login}" method="post">
-      <div>
-        <label>Username: <input type="text" name="username" /></label>
+  <!-- Contenido -->
+  <main class="page">
+    <div class="container">
+      <h1>Formulario de Login</h1>
+      <hr class="red">
+      <div th:if="${param.error}" class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">
+            &times;
+          </span>
+        </button>
+        Nombre de usuario o contraseña inválidos
       </div>
-      <div>
-        <label>Password: <input type="password" name="password" /></label>
+      <div th:if="${param.logout}" class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">
+            &times;
+          </span>
+        </button>
+        Has cerrado sesión exitosamente
       </div>
-      <div>
-        <input type="submit" value="Login" />
-      </div>
-    </form>
+      <form class="form-horizontal" role="form" th:action="@{/login}" method="post">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="email-03">Nombre de Usuario:</label>
+          <div class="col-sm-9">
+            <input class="form-control" id="email-03" placeholder="Nombre de Usuario" type="text" name="username">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="password-03">Contraseña:</label>
+          <div class="col-sm-9">
+            <input class="form-control" id="password-03" placeholder="Contraseña" type="password" name="password">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="pull-right">
+            <button class="btn btn-default" type="submit" onClick="window.location.reload();">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+    <!-- JS -->
+    <script src="https://framework-gb.cdn.gob.mx/qa/gobmx.js"></script>
   </body>
 </html>
